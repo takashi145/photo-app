@@ -11,7 +11,7 @@ class PhotoController extends Controller
 {
     public function index()
     {
-        $photos = Photo::all();
+        $photos = Photo::orderby('updated_at', 'desc')->get();
         return view('photo.index', compact('photos'));
     }
 
@@ -34,7 +34,8 @@ class PhotoController extends Controller
 
     public function show($id)
     {
-        //
+        $photo = Photo::findOrFail($id);
+        return view('photo.show', compact('photo'));
     }
 
     public function edit($id)

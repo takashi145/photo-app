@@ -9,11 +9,11 @@
                   <div class="container px-5 py-24 mx-auto">
                     <div class="flex flex-wrap -m-4">
                     @foreach($photos as $photo)
-                      <div class="lg:w-1/3 md:w-1/2 sm:w-full lg:h-1/3 sm:h-full p-4 ">
+                      <a href="{{ route('photo.show', ['photo' => $photo->id]) }}" class="lg:w-1/3 md:w-1/2 sm:w-full lg:h-1/3 sm:h-full p-4 ">
                         <div class="w-full h-full hover:ring-2 hover:cursor-pointer">
                           <img class="inset-0 w-full h-full object-cover object-center border-2" src="{{ asset('storage/photo/'. $photo->image_name) }}">
                         </div>
-                      </div>
+                      </a>
                     @endforeach
                     </div>
                   </div>
