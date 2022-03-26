@@ -7,7 +7,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <section class="text-gray-600 body-font relative">
-                    <form action="{{ route('photo.store') }}" method="post" class="container px-5 py-12 mx-auto">
+                    <form action="{{ route('photo.store') }}" method="post" enctype="multipart/form-data" class="container px-5 py-12 mx-auto">
                       @csrf
                       <div x-data="image_preview()" class="text-center w-full mb-12">
                         <div class="mb-4 w-full h-full">
@@ -15,7 +15,7 @@
                               <img x-show="image_file" :src="image_file">
                           </div>
                         </div>
-                        <input type="file" id="image" name="image_name" x-ref="preview" @change="upload" class="ml-16">
+                        <input type="file" id="image" name="image_name" x-ref="preview" @change="upload" accept="image/png,image/jpeg,image/jpg" class="ml-16">
                       </div>
                       <div class="lg:w-1/2 md:w-2/3 mx-auto">
                         <div class="flex flex-col -m-2">
