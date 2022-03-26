@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Photo;
+use App\Http\Requests\PostRequest;
 
 class PhotoController extends Controller
 {
@@ -19,7 +20,7 @@ class PhotoController extends Controller
         return view('photo.create');
     }
     
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         $image_path = $request->file('image_name')->store('public/photo/');
         Photo::create([

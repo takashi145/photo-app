@@ -6,6 +6,11 @@
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                @error('image_name')
+                  <div class="text-red-500 m-8">
+                    {{ $message }}
+                  </div>
+                @enderror
                 <section class="text-gray-600 body-font relative">
                     <form action="{{ route('photo.store') }}" method="post" enctype="multipart/form-data" class="container px-5 py-12 mx-auto">
                       @csrf

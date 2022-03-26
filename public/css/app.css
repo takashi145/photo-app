@@ -1004,6 +1004,9 @@ select {
 .-m-4 {
   margin: -1rem;
 }
+.m-8 {
+  margin: 2rem;
+}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
