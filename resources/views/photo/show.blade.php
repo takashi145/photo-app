@@ -17,9 +17,14 @@
                         <h2 class="text-sm title-font text-gray-500 tracking-widest mb-2">カテゴリ</h2>
                         <h1 class="text-gray-700 text-2xl bg-gray-100 rounded title-font font-medium mb-2 p-2">{{ $photo->title}}</h1>
                         <p class="leading-relaxed bg-gray-100 rounded h-64 p-2">{{ $photo->explanation }}</p>
-                        <!-- <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
-                          
-                        </div> -->
+                        <div class="flex justify-between mt-6 pb-5 border-b-2 border-gray-100 mb-5">
+                          <button onclick="location.href='{{ route('photo.edit', ['photo' => $photo->id]) }}'" class="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded">編集</button>
+                          <form action="{{ route('photo.destroy', ['photo' => $photo->id]) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded">削除</button>
+                          </form>
+                        </div>
                       </div>
                     </div>
                   </div>
