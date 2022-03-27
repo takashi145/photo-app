@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 use function PHPSTORM_META\map;
 
@@ -25,6 +26,13 @@ class Photo extends Model
 
     public function favorite()
     {
-        return $this->belongsToMany(Photo::class, 'photo_id', 'user_id');
+        return $this->belongsToMany(User::class, 'favorites', 'photo_id', 'user_id');
+    }
+
+
+    //すでにお気に入りに登録しているか
+    public function favorite_check()
+    {
+        return $this->favorite()->where('user_id', Auth::id())->exists();
     }
 }
