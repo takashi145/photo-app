@@ -12,8 +12,22 @@ class PhotoController extends Controller
 {
     public function __construct()
     {
+        // 写真一覧画面以外に入る場合にはログインが必要
         $this->middleware('auth')->except(['index']);
+
+        // その写真の投稿者ではないユーザーが編集画面に入った場合に404エラー
+        $this->middleware(function($request, $next){
+            $id = $request->route()->parameter('photo');
+            if(!is_null($id)) {
+                $userId = Photo::findOrFail($id)->user->id;
+                if((int)$userId !== Auth::id()){
+                    abort(404);
+                }
+            }
+            return $next($request);
+        })->only('edit');
     }
+
     // 写真一覧画面
     public function index()
     {
@@ -30,7 +44,7 @@ class PhotoController extends Controller
     // 写真情報の保存処理
     public function store(PostRequest $request)
     {
-        $image_path = $request->file('image_name')->store('public/photo/'); // 写真を
+        $image_path = $request->file('image_name')->store('public/photo/');
         Photo::create([
             'user_id' => Auth::id(),
             'image_name' => basename($image_path),
