@@ -68,4 +68,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Photo::class, 'favorites', 'user_id', 'photo_id');
     }
+
+    public function comment()
+    {
+        return $this->belongsToMany(Photo::class, 'comments', 'user_id', 'photo_id')->withPivot('comment', 'updated_at');
+    }
 }

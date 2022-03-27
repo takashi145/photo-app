@@ -23,7 +23,7 @@
                         <h1 class="text-gray-700 text-2xl bg-gray-100 rounded title-font font-medium mb-2 p-2">{{ $photo->title}}</h1>
                         <p class="leading-relaxed bg-gray-100 rounded h-64 p-2">{{ $photo->explanation }}</p>
                         @if($photo->user->id === Auth::id())
-                        <div class="flex justify-between mt-6 pb-2 border-t-2 p-2 border-gray-100">
+                        <div class="flex justify-between mt-6 pb-2 border-b-2 p-2 border-gray-100">
                           <form action="{{ route('photo.destroy', ['photo' => $photo->id]) }}" method="post" onsubmit="return deletion_confirmation()">
                             @csrf
                             @method('delete')
@@ -36,6 +36,9 @@
                     </div>
                   </div>
                 </section>
+                <div class="p-2">
+                  @livewire('comment-post', ['photo' => $photo])
+                </div>
             </div>
         </div>
     </div>
@@ -44,7 +47,7 @@
         if(confirm('本当に削除してもよろしいですか。')){
           return true;
         }
-        return false
+        return false;
       }
     </script>
 </x-app-layout>

@@ -29,10 +29,14 @@ class Photo extends Model
         return $this->belongsToMany(User::class, 'favorites', 'photo_id', 'user_id');
     }
 
-
     //すでにお気に入りに登録しているか
     public function favorite_check()
     {
         return $this->favorite()->where('user_id', Auth::id())->exists();
+    }
+
+    public function comment()
+    {
+        return $this->belongsToMany(User::class, 'comments', 'photo_id', 'user_id')->withPivot('id', 'comment', 'updated_at');
     }
 }
