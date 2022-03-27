@@ -37,6 +37,6 @@ class Photo extends Model
 
     public function comment()
     {
-        return $this->belongsToMany(User::class, 'comments', 'photo_id', 'user_id')->withPivot('id', 'comment', 'updated_at');
+        return $this->belongsToMany(User::class, 'comments', 'photo_id', 'user_id')->withPivot('id', 'user_id', 'comment', 'updated_at');
     }
 }

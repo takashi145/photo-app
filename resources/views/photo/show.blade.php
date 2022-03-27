@@ -6,22 +6,24 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <section class="text-gray-600 body-font overflow-hidden">
-                  <div class="container px-5 py-8 mx-auto">
+                  <div class="container px-2 py-8 mx-auto">
                     @if(session('message'))
                     <div class=" text-white bg-green-400 mx-auto text-center mt-4 p-2 w-1/3 rounded ">
                       {{ session('message') }}
                     </div>
                     @endif
-                    <div class="lg:w-full mx-auto flex flex-wrap">
-                      <img class="lg:w-1/3 w-2/3 mx-auto md:mt-8 lg:h-1/3 object-cover object-center rounded hover:ring-2 border-2 cursor-pointer" src="{{ asset('storage/photo/'. $photo->image_name) }}">
-                      <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-4 lg:mt-0 p-3">
+                    <div class="mx-auto flex flex-wrap p-4">
+                      <div class="w-full md:w-1/2 h-2/3 md:h-full md:mt-8 mx-auto md:pr-4">
+                        <img class="rounded hover:ring-2 border-2 cursor-pointer" src="{{ asset('storage/photo/'. $photo->image_name) }}">
+                      </div>
+                      <div class="w-fulll md:w-1/2 w-full mt-4 p-3">
                         <div class="mx-2 text-right mb-4">
                           投稿者：
                           <a href="" class="text-lg font-bold hover:underline">{{ $photo->user->name }}</a>
                         </div>
                         <h2 class="text-sm title-font text-gray-500 tracking-widest mb-2">カテゴリ</h2>
                         <h1 class="text-gray-700 text-2xl bg-gray-100 rounded title-font font-medium mb-2 p-2">{{ $photo->title}}</h1>
-                        <p class="leading-relaxed bg-gray-100 rounded h-64 p-2">{{ $photo->explanation }}</p>
+                        <p class="leading-relaxed bg-gray-100 rounded h-64 p-2">{!! nl2br(e($photo->explanation)) !!}</p>
                         @if($photo->user->id === Auth::id())
                         <div class="flex justify-between mt-6 pb-2 border-b-2 p-2 border-gray-100">
                           <form action="{{ route('photo.destroy', ['photo' => $photo->id]) }}" method="post" onsubmit="return deletion_confirmation()">

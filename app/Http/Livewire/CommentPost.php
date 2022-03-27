@@ -26,6 +26,7 @@ class CommentPost extends Component
             'comment' => $this->comment,
         ]);
         $this->comment = "";
+        $this->comments = Photo::findOrFail($id)->comment;
     }
 
     public function delete_comment($id)
