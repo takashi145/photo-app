@@ -19,6 +19,7 @@
                       <div class="w-fulll md:w-1/2 w-full mt-4 p-3">
                         <div class="mx-2 text-right mb-4">
                           投稿者：
+                          <img class="inline h-8 w-8 mx-2 rounded-full object-cover" src="{{ $photo->user->profile_photo_url }}" />
                           <a href="" class="text-lg font-bold hover:underline">{{ $photo->user->name }}</a>
                         </div>
                         <h2 class="text-sm title-font text-gray-500 tracking-widest mb-2">カテゴリ</h2>

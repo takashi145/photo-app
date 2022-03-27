@@ -15,12 +15,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl h-full sm:rounded-lg">
                 @if(session('message'))
-                  <div class=" text-white bg-green-400 mx-auto text-center mt-4 p-2 w-1/3 rounded ">
+                  <div class=" text-white bg-green-400 mx-auto text-center mt-4 p-2 w-2/3 rounded ">
                     {{ session('message') }}
                   </div>
-                @elseif(session('delete_messsage'))
-                  <div class=" text-white bg-red-400 mx-auto text-center mt-4 p-2 w-1/3 rounded ">
-                    {{ session('delete_messagemessage') }}
+                @elseif(session('delete_message'))
+                  <div class=" text-white bg-red-400 mx-auto text-center mt-4 p-2 w-2/3 rounded ">
+                    {{ session('delete_message') }}
                   </div>
                 @endif
                 
@@ -36,7 +36,11 @@
                           <img class="inset-0 w-full h-full object-cover object-center border-2" src="{{ asset('storage/photo/'. $photo->image_name) }}">
                         </a>
                         <div class="flex justify-between bg-gray-400 p-2">
-                          <span class="text-black pt-1">投稿者：{{ $photo->user->name }}</span>
+                          <span class="text-black pt-1">
+                            投稿者：
+                            <img class="inline h-8 w-8 mx-2 rounded-full" src="{{ $photo->user->profile_photo_url }}" />
+                            {{ $photo->user->name }}
+                          </span>
                           @livewire('favorite', ['photo' => $photo])
                         </div>
                       </div>

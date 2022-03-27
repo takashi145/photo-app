@@ -18,7 +18,11 @@
         @foreach($comments as $comment)
         <div class="border-b-2 mb-2 p-2">
             <div class="flex justify-between mb-2">
-                <div>ユーザ：{{ $comment->name }}</div>
+                <div>
+                    ユーザ：
+                    <img class="inline h-8 w-8 mx-2 rounded-full object-cover" src="{{ $comment->profile_photo_url }}" />
+                    {{ $comment->name }}
+                </div>
                 <div>コメント日：{{ $comment->pivot->updated_at }}</div>
             </div>
             <div class="bg-gray-100 p-4"> {!! nl2br(e($comment->pivot->comment)) !!}</div>

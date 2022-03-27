@@ -31,9 +31,12 @@ class PhotoController extends Controller
     // 写真一覧画面
     public function index(Request $request)
     {
-        if($request['search'] === 'favorite'){
+        if($request['search'] === 'favorite'){ // お気に入り登録した写真一覧
+            if(!Auth::check()){
+                return redirect()->route('login');
+            }
             $photos = Auth::user()->favorite; //お気に入りに登録した写真を取得
-        }else{
+        }else{  //全ての写真一覧
             $photos = Photo::orderby('updated_at', 'desc')->get();  // すべての投稿を更新日時が新しい順に取得
         }
         return view('photo.index', compact('photos'));
@@ -55,6 +58,7 @@ class PhotoController extends Controller
             'title' => $request->title,
             'explanation' => $request->explanation,
         ]);
+        session()->flash('message', '写真を投稿しました。');
         return redirect()->route('photo.index');
     }
 
