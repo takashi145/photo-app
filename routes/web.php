@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PhotoController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Photo;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('photo.index');
 });
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

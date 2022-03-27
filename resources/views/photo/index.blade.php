@@ -5,6 +5,16 @@
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl h-full sm:rounded-lg">
+                @if(session('message'))
+                  <div class=" text-white bg-green-400 mx-auto text-center mt-4 p-2 w-1/3 rounded ">
+                    {{ session('message') }}
+                  </div>
+                @elseif(session('delete_messsage'))
+                  <div class=" text-white bg-red-400 mx-auto text-center mt-4 p-2 w-1/3 rounded ">
+                    {{ session('delete_messagemessage') }}
+                  </div>
+                @endif
+                
                 <section class="text-gray-600 body-font">
                   <div class="container px-5 py-24 mx-auto">
                     <div class="flex flex-wrap -m-4">
@@ -12,11 +22,11 @@
                       <div class="mx-auto text-2xl">画像が投稿されていません。</div>
                     @endif
                     @foreach($photos as $photo)
-                      <a href="{{ route('photo.show', ['photo' => $photo->id]) }}" class="lg:w-1/3 md:w-1/2 md:h-64 sm:w-full lg:h-64 sm:h-96 p-4 ">
-                        <div class="w-full h-full hover:ring-2 hover:cursor-pointer">
+                      <div class="lg:w-1/3 md:w-1/2 md:h-64 sm:w-full lg:h-64 sm:h-96 p-3 hover:ring-2 hover:cursor-pointer">
+                        <a  href="{{ route('photo.show', ['photo' => $photo->id]) }}" class="w-full h-full">
                           <img class="inset-0 w-full h-full object-cover object-center border-2" src="{{ asset('storage/photo/'. $photo->image_name) }}">
-                        </div>
-                      </a>
+                        </a>
+                      </div>
                     @endforeach
                     </div>
                   </div>

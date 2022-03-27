@@ -10,6 +10,10 @@ use App\Http\Requests\PostRequest;
 
 class PhotoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index']);
+    }
     // 写真一覧画面
     public function index()
     {
@@ -63,6 +67,7 @@ class PhotoController extends Controller
             'title' => $request->title,
             'explanation' => $request->explanation,
         ]);
+        session()->flash('message', '写真情報を更新しました。');
         return redirect()->route('photo.show', ['photo' => $id]);
     }
 
@@ -72,6 +77,7 @@ class PhotoController extends Controller
         $photo = Photo::findOrFail($id);
         Storage::delete('public/photo/'. $photo->image_name);
         $photo->delete();
+        session()->flash('delete_message', '写真を削除しました。');
         return redirect()->route('photo.index');
     }
 }
