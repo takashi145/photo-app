@@ -29,9 +29,13 @@ class PhotoController extends Controller
     }
 
     // 写真一覧画面
-    public function index()
+    public function index(Request $request)
     {
-        $photos = Photo::orderby('updated_at', 'desc')->get();  // 更新日時が新しい順に取得
+        if($request['search'] === 'favorite'){
+            $photos = Auth::user()->favorite; //お気に入りに登録した写真を取得
+        }else{
+            $photos = Photo::orderby('updated_at', 'desc')->get();  // すべての投稿を更新日時が新しい順に取得
+        }
         return view('photo.index', compact('photos'));
     }
 

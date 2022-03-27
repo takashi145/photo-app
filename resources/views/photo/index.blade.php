@@ -1,5 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
+      <form action="{{ route('photo.index') }}" method="get">
+          <button name="search" value="all" class="m-4 @if(!isset($_GET['search']) || $_GET['search'] === 'all') underline @endif">
+            すべて
+          </button>
+          <button name="search" value="favorite" class="m-4 @if(isset($_GET['search']) && $_GET['search'] === 'favorite') underline @endif">
+            お気に入り
+          </button>
+      </form>
+      
     </x-slot>
 
     <div class="py-4">
@@ -19,7 +28,7 @@
                   <div class="container px-5 py-24 mx-auto">
                     <div class="flex flex-wrap -m-4">
                     @if(count($photos) === 0)
-                      <div class="mx-auto text-2xl">画像が投稿されていません。</div>
+                      <div class="mx-auto text-2xl">写真がありません。</div>
                     @endif
                     @foreach($photos as $photo)
                       <div class="lg:w-1/3 md:w-1/2 md:h-1/2 sm:w-full lg:h-1/3 sm:h-full p-3 mb-8 hover:ring-2">
