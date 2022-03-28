@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\UserPageController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Photo;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use App\Models\Photo;
 */
 
 Route::get('/', function () {
-    return redirect()->route('photo.index');
+    return redirect()->route('login');
 });
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -24,3 +25,5 @@ Route::get('/', function () {
 // })->name('dashboard');
 
 Route::resource('photo', PhotoController::class);
+
+Route::get('/{id}', [UserPageController::class, 'index'])->name('user_page');

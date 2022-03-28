@@ -2,7 +2,10 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex">
+            <div class="md:hidden">
+                
+            </div>
+            <div class="flex ml-8 md:ml-0">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('photo.index') }}">
@@ -15,6 +18,11 @@
                     <x-jet-nav-link href="{{ route('photo.index') }}" :active="request()->routeIs('photo.index')">
                         ホーム
                     </x-jet-nav-link>
+                    @if(Auth::check())
+                    <x-jet-nav-link href="{{ route('user_page', ['id' => Auth::id()]) }}" :active="request()->routeIs('user_page', ['id' => Auth::id()])">
+                        マイページ
+                    </x-jet-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -159,6 +167,11 @@
             <x-jet-responsive-nav-link href="{{ route('photo.index') }}" :active="request()->routeIs('photo.index')">
                 ホーム
             </x-jet-responsive-nav-link>
+            @if(Auth::check())
+            <x-jet-responsive-nav-link href="{{ route('user_page', ['id' => Auth::id()]) }}" :active="request()->routeIs('user_page', ['id' => Auth::id()])">
+                マイページ
+            </x-jet-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
@@ -173,16 +186,18 @@
                 @if(Auth::check())
                 <div>
                     <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                    <!-- <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div> -->
                 </div>
                 @endif
             </div>
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
+                @if(Auth::check())
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('プロフィール') }}
                 </x-jet-responsive-nav-link>
+                @endif
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
@@ -193,11 +208,22 @@
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}" x-data>
                     @csrf
-
+                    
+                    @if(Auth::check())
                     <x-jet-responsive-nav-link href="{{ route('logout') }}"
-                                   @click.prevent="$root.submit();">
+                                @click.prevent="$root.submit();">
                         {{ __('ログアウト') }}
                     </x-jet-responsive-nav-link>
+                    @else
+                    <x-jet-responsive-nav-link href="{{ route('register') }}"
+                                @click.prevent="$root.submit();">
+                        {{ __('新規登録') }}
+                    </x-jet-responsive-nav-link>
+                    <x-jet-responsive-nav-link href="{{ route('login') }}"
+                                @click.prevent="$root.submit();">
+                        {{ __('ログイン') }}
+                    </x-jet-responsive-nav-link>
+                    @endif
                 </form>
 
                 <!-- Team Management -->

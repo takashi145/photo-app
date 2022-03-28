@@ -8,7 +8,6 @@
             お気に入り
           </button>
       </form>
-      
     </x-slot>
 
     <div class="py-4">
@@ -31,14 +30,14 @@
                       <div class="mx-auto text-2xl">写真がありません。</div>
                     @endif
                     @foreach($photos as $photo)
-                      <div class="lg:w-1/3 md:w-1/2 md:h-1/2 sm:w-full lg:h-1/3 sm:h-full p-3 mb-8 hover:ring-2">
+                      <div class="lg:w-1/3 md:w-1/2 md:h-1/2 sm:w-full lg:h-1/3 sm:h-full p-4 mb-8">
                         <a href="{{ route('photo.show', ['photo' => $photo->id]) }}" class="w-full h-full">
                           <img class="inset-0 w-full h-full object-cover object-center border-2" src="{{ asset('storage/photo/'. $photo->image_name) }}">
                         </a>
                         <div class="flex justify-between bg-gray-400 p-2">
                           <span class="text-black pt-1">
                             投稿者：
-                            <img class="inline h-8 w-8 mx-2 rounded-full" src="{{ $photo->user->profile_photo_url }}" />
+                            <img class="inline h-8 w-8 mx-1 rounded-full" src="{{ $photo->user->profile_photo_url }}" />
                             {{ $photo->user->name }}
                           </span>
                           @livewire('favorite', ['photo' => $photo])
