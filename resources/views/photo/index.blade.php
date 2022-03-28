@@ -30,7 +30,7 @@
                       <div class="mx-auto text-2xl">写真がありません。</div>
                     @endif
                     @foreach($photos as $photo)
-                      <div class="lg:w-1/3 md:w-1/2 md:h-1/2 sm:w-full lg:h-1/3 sm:h-full p-4 mb-8">
+                      <div class="lg:w-1/3 md:w-1/2 md:h-1/2 sm:w-full lg:h-1/3 sm:h-full p-4 mb-16 md:mb-4">
                         <a href="{{ route('photo.show', ['photo' => $photo->id]) }}" class="w-full h-full">
                           <img class="inset-0 w-full h-full object-cover object-center border-2" src="{{ asset('storage/photo/'. $photo->image_name) }}">
                         </a>

@@ -16,7 +16,7 @@
                       @csrf
                       <div x-data="image_preview()" class="text-center w-full mb-12">
                         <div class="mb-4 w-full h-full">
-                          <div x-show="image_file" class="border-2">
+                          <div x-show="image_file" class="border-2 mx-auto md:w-2/3 md:h-2/3">
                               <img x-show="image_file" :src="image_file">
                           </div>
                         </div>

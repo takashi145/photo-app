@@ -13,7 +13,7 @@
                     </div>
                     @endif
                     <div class="mx-auto flex flex-wrap p-4">
-                      <div class="w-full md:w-1/2 h-2/3 md:h-full md:mt-8 mx-auto md:pr-4">
+                      <div class="w-full md:w-1/2 h-2/3 md:h-full md:mt-16 mx-auto md:pr-4">
                         <img class="rounded hover:ring-2 border-2 cursor-pointer" src="{{ asset('storage/photo/'. $photo->image_name) }}">
                       </div>
                       <div class="w-fulll md:w-1/2 w-full mt-4 p-3">
