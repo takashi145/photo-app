@@ -16,8 +16,8 @@
                       @csrf
                       <div x-data="image_preview()" class="text-center w-full mb-12">
                         <div class="mb-4 w-full h-full">
-                          <div x-show="image_file" class="border-2 mx-auto md:w-2/3 md:h-2/3">
-                              <img x-show="image_file" :src="image_file">
+                          <div x-show="image_file" class="border-2 mx-auto md:w-1/2 md:h-1/2">
+                              <img x-show="image_file" :src="image_file" class="inset-0 w-full h-full object-cover object-center border-2">
                           </div>
                         </div>
                         <input type="file" id="image" name="image_name" x-ref="preview" @change="upload" accept="image/png,image/jpeg,image/jpg" class="ml-16">

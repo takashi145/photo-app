@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Photo;
 use App\Http\Requests\PostRequest;
+use Image;
+use App\Service\ImageService;
 
 class PhotoController extends Controller
 {
     public function __construct()
     {
-        // 写真一覧画面以外に入る場合にはログインが必要
         $this->middleware('auth')->except(['index']);
 
         // その写真の投稿者ではないユーザーが編集画面に入った場合に404エラー
@@ -50,11 +51,11 @@ class PhotoController extends Controller
     
     // 写真情報の保存処理
     public function store(PostRequest $request)
-    {
-        $image_path = $request->file('image_name')->store('public/photo/');
+    {   
+        $fileNameToStore = ImageService::image_upload($request->image_name);
         Photo::create([
             'user_id' => Auth::id(),
-            'image_name' => basename($image_path),
+            'image_name' => $fileNameToStore,
             'title' => $request->title,
             'explanation' => $request->explanation,
         ]);
@@ -80,12 +81,14 @@ class PhotoController extends Controller
     public function update(Request $request, $id)
     {
         $photo = Photo::findOrFail($id);
-        $image_path = $photo->image_name;
-        if(!is_Null($request->image_name)){ // 画像が変更されているか
-            $image_path = $request->file('image_name')->store('public/photo/');
+        if(!is_Null($request->image_name)){ // 画像も変更されているか
+            $fileNameToStore = ImageService::image_upload($request->image_name);
+        }else {
+            $fileNameToStore = $photo->image_name;
         }
+        
         $photo->update([
-            'image_name' => basename($image_path),
+            'image_name' => $fileNameToStore,
             'title' => $request->title,
             'explanation' => $request->explanation,
         ]);

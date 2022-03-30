@@ -12,10 +12,10 @@
                       @method('put')
                       <div x-data="image_preview()" class="text-center w-full mb-12">
                         <div class="mb-4 w-full h-full">
-                          <div x-show="image_file" class="border-2">
+                          <div x-show="image_file" class="border-2 md:w-1/2 md:h-1/2 mx-auto">
                               <img :src="image_file">
                           </div>
-                          <div x-show="!image_file" class="border-2">
+                          <div x-show="!image_file" class="border-2 md:w-1/2 md:h-1/2 mx-auto">
                               <img src="{{ asset('storage/photo/'. $photo->image_name) }}">
                           </div>
                         </div>
