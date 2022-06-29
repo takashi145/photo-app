@@ -24,7 +24,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="md:pl-32 sm:w-1/2 sm:pl-8 sm:py-8 md:p-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
+                                <div class="md:pl-32 md:w-1/2 sm:pl-8 sm:py-8 md:p-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
                                     <h3 class="text-xl bg-blue-200 rounded p-2">投稿した写真一覧</h3>
                                     @if(count($user->photos) === 0)
                                         <div class="text-lg text-center text-gray-800 mt-8">
@@ -32,11 +32,15 @@
                                         </div>
                                     @endif
                                     @foreach($user->photos as $photo)
-                                        <div class="m-2 p-2">
+                                        <div class="my-8 p-2">
                                             <button onclick="location.href='{{ route('photo.show', ['photo' => $photo->id]) }}'" class="border-2 hover:ring-2 cursor-pointer">
                                                 <img src="{{ asset('storage/photo/'. $photo->image_name) }}">
                                             </button>
+                                            <div class="">
+                                                @livewire('favorite', ['photo' => $photo])
+                                            </div>
                                         </div>
+                    
                                     @endforeach
                                 </div>
                             </div>

@@ -15,12 +15,15 @@
                     <div class="mx-auto flex flex-wrap p-4">
                       <div class="w-full md:w-1/2 h-2/3 md:h-full md:mt-16 mx-auto md:pr-4">
                         <img class="rounded hover:ring-2 border-2 cursor-pointer" src="{{ asset('storage/photo/'. $photo->image_name) }}">
+                        <div class="">
+                          @livewire('favorite', ['photo' => $photo])
+                        </div>
                       </div>
                       <div class="w-fulll md:w-1/2 w-full mt-4 p-3">
                         <div class="mx-2 text-right mb-4">
                           投稿者：
                           <img class="inline h-8 w-8 mx-2 rounded-full object-cover" src="{{ $photo->user->profile_photo_url }}" />
-                          <a href="" class="text-lg font-bold hover:underline">{{ $photo->user->name }}</a>
+                          <a href="{{ route('user_page', ['id' => $photo->user->id]) }}" class="text-lg font-bold hover:underline">{{ $photo->user->name }}</a>
                         </div>
                         <h2 class="text-sm title-font text-gray-500 tracking-widest mb-2">カテゴリ</h2>
                         <h1 class="text-gray-700 text-2xl bg-gray-100 rounded title-font font-medium mb-2 p-2">{{ $photo->title}}</h1>

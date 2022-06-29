@@ -9,6 +9,7 @@ use App\Models\Photo;
 use App\Http\Requests\PostRequest;
 use Image;
 use App\Service\ImageService;
+use Illuminate\Support\Facades\DB;
 
 class PhotoController extends Controller
 {

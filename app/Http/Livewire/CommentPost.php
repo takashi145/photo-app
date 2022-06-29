@@ -5,12 +5,13 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Photo;
 
 class CommentPost extends Component
 {
-    public $photo;
+    public Photo $photo;
     public $comment = "";
-    public $comments;
+    // public $comments;
 
     public function comment($id)
     {
@@ -29,7 +30,8 @@ class CommentPost extends Component
 
     public function render()
     {
-        $this->comments = $this->photo->comment()->orderBy('comments.updated_at', 'desc')->get();
-        return view('livewire.comment-post');
+        //コメントしたユーザーを取得
+        $users = $this->photo->comment()->orderBy('comments.updated_at', 'desc')->get();
+        return view('livewire.comment-post', compact('users'));
     }
 }

@@ -4,11 +4,11 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Photo;
 
 class Favorite extends Component
 {
-    public $photo;
-    public $count;
+    public Photo $photo;
 
     public function favorite(){
         //ログインしていないユーザがお気に入りボタンを押したらログインページにリダイレクト
@@ -24,7 +24,7 @@ class Favorite extends Component
 
     public function render()
     {
-        $this->count = $this->photo->favorite()->count();
-        return view('livewire.favorite');
+        $count = $this->photo->favorite()->count();
+        return view('livewire.favorite', compact('count'));
     }
 }
