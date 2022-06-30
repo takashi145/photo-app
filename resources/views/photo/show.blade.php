@@ -22,12 +22,17 @@
                       <div class="w-fulll md:w-1/2 w-full mt-4 p-3">
                         <div class="mx-2 text-right mb-4">
                           投稿者：
+                          @if($photo->user_id === Auth::id())
+                            <span class="bg-green-300 p-2 rounded-full">自分</span>
+                          @endif
                           <img class="inline h-8 w-8 mx-2 rounded-full object-cover" src="{{ $photo->user->profile_photo_url }}" />
                           <a href="{{ route('user_page', ['id' => $photo->user->id]) }}" class="text-lg font-bold hover:underline">{{ $photo->user->name }}</a>
                         </div>
                         <h2 class="text-sm title-font text-gray-500 tracking-widest mb-2">カテゴリ</h2>
                         <h1 class="text-gray-700 text-2xl bg-gray-100 rounded title-font font-medium mb-2 p-2">{{ $photo->title}}</h1>
+                        @if(!is_null($photo->explanation))
                         <p class="leading-relaxed bg-gray-100 rounded h-64 p-2">{!! nl2br(e($photo->explanation)) !!}</p>
+                        @endif
                         @if($photo->user->id === Auth::id())
                         <div class="flex justify-between mt-6 pb-2 border-b-2 p-2 border-gray-100">
                           <form action="{{ route('photo.destroy', ['photo' => $photo->id]) }}" method="post" onsubmit="return deletion_confirmation()">

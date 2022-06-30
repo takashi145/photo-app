@@ -10,11 +10,20 @@ use App\Models\Photo;
 class CommentPost extends Component
 {
     public Photo $photo;
-    public $comment = "";
-    // public $comments;
+    public $comment;
+
+    protected $rules = [
+        'comment' => 'required|max:30',
+    ];
+
+    public function mount() 
+    {
+        $this->comment = "";
+    }
 
     public function comment($id)
     {
+        $this->validate();
         Comment::create([
             'user_id' => Auth::id(),
             'photo_id' => $id,

@@ -7,6 +7,7 @@
             <div class="text-center"> 
                 <textarea wire:model.defer="comment" class="w-2/3 md:w-1/2 h-24" placeholder="コメントを入力してください。"></textarea>
             </div>
+            @error('comment') <div class="text-center text-red-500">{{ $message }}</div> @enderror
             <div class="text-right w-2/3 md:w-1/2 mx-auto">
                 <button type="submit" class="text-white bg-blue-500 py-2 px-4 rounded">コメントを送信</button>
             </div>
