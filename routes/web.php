@@ -20,10 +20,8 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
-
-Route::resource('photo', PhotoController::class);
-
-Route::get('/{id}', [UserPageController::class, 'index'])->name('user_page');
+Route::resource('photo', PhotoController::class)->only('index');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::resource('photo', PhotoController::class)->except('index');
+    Route::get('user/{id}', [UserPageController::class, 'index'])->name('user_page');
+});

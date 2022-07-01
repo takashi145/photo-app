@@ -30,7 +30,7 @@ class PhotoController extends Controller
                 }
             }
             return $next($request);
-        })->only('edit');
+        })->only('edit', 'update');
     }
 
     // 写真一覧画面
