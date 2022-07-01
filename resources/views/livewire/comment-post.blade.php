@@ -27,7 +27,10 @@
                     <img class="inline h-8 w-8 mx-2 rounded-full object-cover" src="{{ $user->profile_photo_url }}" />
                     {{ $user->name }}
                 </div>
-                <div>コメント日：{{ $user->pivot->updated_at }}</div>
+                <div>
+                    コメント日：
+                    {{ \Carbon\Carbon::create($user->pivot->updated_at)->diffForHumans(now()) }}
+                </div>
             </div>
             <div class="bg-gray-100 p-4"> {!! nl2br(e($user->pivot->comment)) !!}</div>
             @if($user->id === Auth::id())

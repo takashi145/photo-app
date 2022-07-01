@@ -1,13 +1,36 @@
 <x-app-layout>
     <x-slot name="header">
       <form action="{{ route('photo.index') }}" method="get">
-          <button name="search" value="all" class="m-4 @if(!isset($_GET['search']) || $_GET['search'] === 'all') underline @endif">
+          <button name="search" value="all" class="m-4 @if(!isset($_GET['search']) || $_GET['search'] === 'all') text-blue-400 text-lg font-bold @endif">
             すべて
           </button>
-          <button name="search" value="favorite" class="m-4 @if(isset($_GET['search']) && $_GET['search'] === 'favorite') underline @endif">
+          <button name="search" value="favorite" class="m-4 @if(isset($_GET['search']) && $_GET['search'] === 'favorite') text-blue-400 text-lg font-bold @endif">
             お気に入り
           </button>
       </form>
+
+      <div class="p-3 w-full mb-4">
+        <div class="relative">
+          <h5>カテゴリ―</h5>
+          <div class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-48 overflow-scroll">
+            @if(isset($_GET['category_id']))
+            <a href="{{ route('photo.index') }}">すべて</a>
+            @else
+            <p class="text-green-500 font-bold">すべて</p>
+            @endif
+
+            @foreach($categories as $category)
+            <div>
+              @if(!isset($_GET['category_id']) || $category->id != $_GET['category_id'])
+              <a href="{{ route('photo.index', ['category_id' => $category->id, 'search' => $_GET['search'] ?? 'all']) }}">{{ $category->name }}</a>
+              @else
+              <p class="text-green-500 font-bold">{{ $category->name }}</p>
+              @endif
+            </div>
+            @endforeach
+          </div>
+        </div>
+      </div>
     </x-slot>
 
     <div class="py-4">
@@ -36,9 +59,8 @@
                         </a>
                         <div class="flex justify-between bg-gray-400 p-2">
                           <span class="text-black pt-1">
-                            投稿者：
-                            <img class="inline h-8 w-8 mx-1 rounded-full" src="{{ $photo->user->profile_photo_url }}" />
-                            {{ $photo->user->name }}
+                            タイトル : 
+                            <span class="text-lg">{{ $photo->title }}</span>
                           </span>
                           @livewire('favorite', ['photo' => $photo])
                         </div>

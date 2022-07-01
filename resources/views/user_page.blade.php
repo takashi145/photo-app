@@ -36,7 +36,11 @@
                                             <button onclick="location.href='{{ route('photo.show', ['photo' => $photo->id]) }}'" class="border-2 hover:ring-2 cursor-pointer">
                                                 <img src="{{ asset('storage/photo/'. $photo->image_name) }}">
                                             </button>
-                                            <div class="">
+                                            <div class="flex justify-between">
+                                                <div>
+                                                    投稿日：{{ \Carbon\Carbon::create($photo->updated_at)->diffForHumans(now()) }}<br>
+                                                    タイトル：{{ $photo->title }}
+                                                </div>
                                                 @livewire('favorite', ['photo' => $photo])
                                             </div>
                                         </div>
